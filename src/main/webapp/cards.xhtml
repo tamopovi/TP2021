@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>All registered cards:</h2>
+    <ol>
+        <ui:repeat value="#{cards.allCards}" var="card">
+            <li><h:link value="#{card.name}" outcome="card?cardId=#{card.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <table>
+            <tr>
+                <td>Input card name:</td>
+                <td><h:inputText value="#{cards.cardToCreate.name}" required="true"/></td>
+            </tr>
+            <tr>
+                <td>Input color:</td>
+                <td><h:selectOneMenu value="#{cards.cardToCreate.color}" required="true">
+                    <f:selectItems value="#{data.colors}"/>
+                </h:selectOneMenu></td>
+            </tr>
+            <tr>
+                <td>Input type:</td>
+                <td><h:selectOneMenu value="#{cards.cardToCreate.type}" required="true">
+                    <f:selectItems value="#{data.types}"/>
+                </h:selectOneMenu></td>
+            </tr>
+            <tr>
+                <td>Input mana value:</td>
+                <td><h:inputText value="#{cards.cardToCreate.manaValue}" required="true"/></td>
+            </tr>
+        </table>
+        <h:commandButton value="Add card to registered card list" action="#{cards.createCard}"/>
+    </h:form>
+</h:body>
+</html> 

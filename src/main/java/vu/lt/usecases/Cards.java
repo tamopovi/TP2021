@@ -1,52 +1,40 @@
 package vu.lt.usecases;
 
+import lombok.Getter;
+import lombok.Setter;
 import vu.lt.entities.Card;
+import vu.lt.persistence.CardsDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import java.io.Serializable;
-import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import vu.lt.persistence.CardsDAO;
-
+import java.util.List;
 
 @Model
-public class Cards implements Serializable {
-
+public class Cards {
     @Inject
     private CardsDAO cardsDAO;
 
+    @Getter
+    @Setter
     private Card cardToCreate = new Card();
 
-
-
+    @Getter
     private List<Card> allCards;
 
     @PostConstruct
     public void init() {
-        loadCards();
-    }
-
-    public void loadCards() {
-        this.allCards = cardsDAO.loadAll();
-    }
-
-    public List<Card> getAllCards() {
-        return allCards;
+        loadAllCards();
     }
 
     @Transactional
-    public String createCard(){
+    public String createCard() {
         this.cardsDAO.persist(cardToCreate);
         return "success";
     }
 
-    public Card getCardToCreate() {
-        return cardToCreate;
-    }
-
-    public void setCardToCreate(Card cardToCreate) {
-        this.cardToCreate = cardToCreate;
+    private void loadAllCards() {
+        this.allCards = cardsDAO.loadAll();
     }
 }

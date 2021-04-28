@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:body>
+    <nav>
+        <h:link outcome="index" value="Home"/>
+        <h:link outcome="sets" value="Sets"/>
+        <h:link outcome="cards" value="Cards"/>
+    </nav>
+    <h2>CardSets:</h2>
+    <ol>
+        <ui:repeat value="#{cardSets.allCardSets}" var="cardSet">
+            <li><h:link value="#{cardSet.name}" outcome="cardSet?cardSetId=#{cardSet.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <table>
+            <tr>
+                <td>Input set name:</td>
+                <td><h:inputText value="#{cardSets.cardSetToCreate.name}" required="true"/></td>
+            </tr>
+            <tr>
+                <td>Input set code:</td>
+                <td><h:inputText value="#{cardSets.cardSetToCreate.code}" required="true"/></td>
+            </tr>
+            <tr>
+                <td>Input year of release:</td>
+                <td><h:inputText value="#{cardSets.cardSetToCreate.yearOfRelease}" required="true"/></td>
+            </tr>
+        </table>
+        <h:commandButton value="Create a new set!" action="#{cardSets.createCardSet}" />
+    </h:form>
+</h:body>
+</html>

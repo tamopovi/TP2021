@@ -6,15 +6,11 @@
 >
 <h:head/>
 <h:body>
-    <h2>Cards:</h2>
-    <ol>
-        <ui:repeat value="#{cards.allCards}" var="card">
-            <li>#{card.name}</li>
-        </ui:repeat>
-    </ol>
-    <h:form>
-        <h:inputText value="#{cards.cardToCreate.name}" required="true" />
-        <h:commandButton value="Add new card" action="#{cards.createCard}" />
-    </h:form>
+    <h1>Welcome to the MTG card database!</h1>
+    <nav>
+        <h:link outcome="index" value="Home"/>
+        <h:link outcome="sets" value="Sets"/>
+        <h:link outcome="cards" value="Cards"/>
+    </nav>
 </h:body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head/>
+<h:body>
+    <nav>
+        <h:link outcome="index" value="Home"/>
+        <h:link outcome="sets" value="Sets"/>
+        <h:link outcome="cards" value="Cards"/>
+    </nav>
+    <h2>Card Set: #{cardSets.cardSet.name}</h2>
+    <h3>Set info:</h3>
+    <table>
+        <tr>
+            <td>Code:</td>
+            <td><span>#{cardSets.cardSet.code}</span></td>
+        </tr>
+        <tr>
+            <td>Size:</td>
+            <td><span>#{cardSets.cardSet.size}</span></td>
+        </tr>
+        <tr>
+            <td>Year of release:</td>
+            <td><span>#{cardSets.cardSet.yearOfRelease}</span></td>
+        </tr>
+    </table>
+    <h:form>
+        <table>
+            <tr>
+                <td>Card name:</td>
+                <td><h:selectOneMenu value="#{cardSets.cardPrintingToCreate.id}" required="true" >
+                    <f:selectItems value="#{cards.allCards}"  var="card" itemLabel="#{card.name}" itemValue="#{card.id}"/>
+                </h:selectOneMenu></td>
+            </tr>
+        </table>
+        <h:commandButton value="Add a new card printing to this set!" action="#{cardSets.createCardPrinting}">
+            <f:param name="cardSetId" value="#{cardSets.cardSet.id}" />
+        </h:commandButton>
+    </h:form>
+</h:body>
+</html>

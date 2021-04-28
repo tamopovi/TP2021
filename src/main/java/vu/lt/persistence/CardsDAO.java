@@ -9,6 +9,7 @@ import java.util.List;
 
 @ApplicationScoped
 public class CardsDAO {
+
     @PersistenceContext
     private EntityManager em;
 
@@ -20,7 +21,15 @@ public class CardsDAO {
         this.em = em;
     }
 
-    public void persist(Card card){
+    public void persist(Card card) {
         this.em.persist(card);
+    }
+
+    public Card findOne(Integer id) {
+        return em.find(Card.class, id);
+    }
+
+    public Card findCardByCardName(String cardName){
+        return em.find(Card.class,cardName);
     }
 }
